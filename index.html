@@ -1,178 +1,1400 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Wiltshire Christmas Trees – Local Delivery</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Wiltshire Christmas Trees</title>
+  <meta name="description" content="Premium Christmas trees in Wiltshire – no hassle, delivered fast within 48 hours. Pay by cash or bank transfer on delivery." />
 
-<style>
+  <style>
+    /* ---------- GLOBAL RESET ---------- */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      scroll-behavior: smooth;
+    }
+
     body {
-        margin: 0;
-        font-family: 'Inter', sans-serif;
-        background: #0d1b0f;
-        color: white;
-        overflow-x: hidden;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      color: #102019;
+      background: radial-gradient(circle at top left, #f3fbff 0%, #fdf7ff 35%, #fefaf4 75%, #f7fff6 100%);
+      position: relative;
+      overflow-x: hidden;
     }
 
-    /* Snowfall */
-    .snowflake {
-        position: fixed;
-        top: -10px;
-        color: white;
-        font-size: 1rem;
-        pointer-events: none;
-        animation: fall linear infinite;
-        opacity: 0.8;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
 
-    @keyframes fall {
-        0%   { transform: translateY(0); }
-        100% { transform: translateY(110vh); }
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    /* Hero */
-    .hero {
-        background: url('https://images.unsplash.com/photo-1543968443-3ddaf55f9a5f?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
-        padding: 140px 20px;
-        text-align: center;
-        backdrop-filter: brightness(0.7);
+    /* ---------- SNOW CANVAS ---------- */
+    #snow-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100vw;
+      height: 100vh;
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .hero h1 {
-        font-size: 3rem;
-        font-weight: 800;
-        margin-bottom: 10px;
-        color: #f44336;
-        text-shadow: 0 0 15px rgba(255,0,0,0.7);
+    /* ---------- HEADER ---------- */
+    header {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      padding: 1rem 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      backdrop-filter: blur(14px);
+      background: linear-gradient(
+        to right,
+        rgba(255, 255, 255, 0.74),
+        rgba(245, 252, 255, 0.82),
+        rgba(255, 248, 252, 0.76)
+      );
+      border-bottom: 1px solid rgba(255, 255, 255, 0.7);
+      box-shadow: 0 14px 40px rgba(15, 43, 25, 0.09);
     }
 
-    .hero p {
-        font-size: 1.3rem;
-        color: #ffe6e6;
-        max-width: 600px;
-        margin: auto;
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .section {
-        padding: 60px 20px;
-        max-width: 900px;
-        margin: auto;
-        text-align: center;
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      border-radius: 999px;
+      background: radial-gradient(circle at 30% 30%, #ffffff 0%, #e3fff3 35%, #bdffe9 70%, #9be4ff 100%);
+      box-shadow:
+        0 0 12px rgba(144, 238, 144, 0.7),
+        0 0 24px rgba(144, 238, 144, 0.5),
+        0 0 40px rgba(173, 216, 230, 0.6);
+      position: relative;
+      overflow: hidden;
     }
 
-    .section h2 {
-        font-size: 2rem;
-        color: #4CAF50;
-        margin-bottom: 15px;
+    .brand-logo::before {
+      content: "";
+      position: absolute;
+      inset: 18%;
+      border-radius: 999px;
+      border: 3px solid rgba(255, 255, 255, 0.9);
+      border-top-color: rgba(255, 0, 92, 0.65);
+      border-right-color: rgba(52, 201, 108, 0.8);
+      border-bottom-color: rgba(0, 161, 255, 0.8);
+      filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
     }
 
-    .tree-card {
-        background: rgba(255,255,255,0.1);
-        padding: 20px;
-        border-radius: 12px;
-        margin-bottom: 20px;
-        backdrop-filter: blur(4px);
-        border: 1px solid rgba(255,255,255,0.2);
+    .brand-text {
+      display: flex;
+      flex-direction: column;
+      gap: 0.1rem;
     }
 
-    .tree-card h3 {
-        color: #4CAF50;
-        margin-bottom: 5px;
+    .brand-text strong {
+      font-weight: 700;
+      font-size: 1.05rem;
+      letter-spacing: 0.03em;
+    }
+
+    .brand-text span {
+      font-size: 0.8rem;
+      opacity: 0.75;
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.9rem;
+    }
+
+    .nav-link {
+      padding: 0.45rem 0.9rem;
+      border-radius: 999px;
+      border: 1px solid transparent;
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(16, 80, 58, 0.12);
+      box-shadow: 0 10px 30px rgba(10, 80, 60, 0.12);
+    }
+
+    .nav-cta {
+      padding: 0.5rem 1.1rem;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #39c37b, #40e0b4, #6dd6ff);
+      color: #062012;
+      font-weight: 600;
+      border: none;
+      box-shadow: 0 12px 35px rgba(12, 116, 67, 0.45);
+      transition: transform 0.18s ease, box-shadow 0.18s ease;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 16px 45px rgba(12, 116, 67, 0.7);
+    }
+
+    /* ---------- MAIN LAYOUT WRAPPER ---------- */
+    main {
+      position: relative;
+      z-index: 1;
+    }
+
+    section {
+      padding: 4.5rem 1.5rem;
+      max-width: 1120px;
+      margin-inline: auto;
+    }
+
+    /* ---------- HERO ---------- */
+    #hero {
+      min-height: calc(100vh - 72px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr);
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .hero-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.2em;
+      font-size: 0.75rem;
+      color: #188f56;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      padding: 0.3rem 0.7rem;
+      background: rgba(236, 253, 243, 0.98);
+      border-radius: 999px;
+      border: 1px solid rgba(122, 221, 165, 0.6);
+      box-shadow: 0 8px 22px rgba(12, 116, 67, 0.18);
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-kicker-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 999px;
+      background: #39c37b;
+      box-shadow: 0 0 12px rgba(57, 195, 123, 0.9);
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 4vw, 3rem);
+      line-height: 1.05;
+      margin-bottom: 1.1rem;
+    }
+
+    .hero-title span {
+      background: linear-gradient(135deg, #1c9b66, #ff567b, #5bbcff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-subtitle {
+      font-size: 1rem;
+      max-width: 480px;
+      color: rgba(12, 38, 24, 0.8);
+      margin-bottom: 1.7rem;
+    }
+
+    .hero-badges {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 2rem;
+    }
+
+    .hero-badge {
+      font-size: 0.8rem;
+      padding: 0.4rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      border: 1px solid rgba(190, 225, 203, 0.9);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+    }
+
+    .hero-badge-emoji {
+      font-size: 0.9rem;
+    }
+
+    .hero-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      align-items: center;
+      margin-bottom: 1.2rem;
+    }
+
+    .hero-primary-cta {
+      padding: 0.85rem 1.6rem;
+      border-radius: 999px;
+      border: none;
+      background: radial-gradient(circle at 10% 0%, #ffffff 0%, #59e39f 45%, #7ee8ff 90%);
+      color: #093420;
+      font-weight: 700;
+      font-size: 0.95rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow:
+        0 18px 45px rgba(12, 116, 67, 0.65),
+        0 0 18px rgba(121, 237, 191, 0.8);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+      transition: transform 0.16s ease, box-shadow 0.16s ease;
+    }
+
+    .hero-primary-cta:hover {
+      transform: translateY(-1px) scale(1.01);
+      box-shadow:
+        0 22px 60px rgba(12, 116, 67, 0.8),
+        0 0 22px rgba(121, 237, 191, 1);
+    }
+
+    .hero-secondary-cta {
+      padding: 0.75rem 1.3rem;
+      border-radius: 999px;
+      border: 1px solid rgba(42, 152, 110, 0.35);
+      background: rgba(255, 255, 255, 0.9);
+      font-size: 0.9rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      cursor: pointer;
+      transition: background 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+    }
+
+    .hero-secondary-cta:hover {
+      background: rgba(242, 255, 246, 0.98);
+      transform: translateY(-1px);
+      box-shadow: 0 12px 32px rgba(12, 84, 54, 0.18);
+    }
+
+    .hero-contact-line {
+      font-size: 0.85rem;
+      color: rgba(12, 38, 24, 0.8);
+    }
+
+    .hero-contact-line strong {
+      font-weight: 700;
+    }
+
+    .hero-contact-line a {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+    }
+
+    /* Hero right visual */
+    .hero-visual {
+      position: relative;
+      min-height: 280px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-glass {
+      position: relative;
+      width: 100%;
+      max-width: 420px;
+      padding: 1.3rem;
+      border-radius: 28px;
+      background: radial-gradient(circle at top, rgba(255, 255, 255, 0.95), rgba(231, 249, 243, 0.9));
+      box-shadow:
+        0 30px 80px rgba(10, 55, 36, 0.35),
+        0 0 40px rgba(186, 242, 210, 0.9);
+      overflow: hidden;
+    }
+
+    .hero-glass::before {
+      content: "";
+      position: absolute;
+      inset: -35%;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 255, 255, 0.9) 0, transparent 50%),
+        radial-gradient(circle at 85% 30%, rgba(255, 98, 128, 0.22) 0, transparent 60%),
+        radial-gradient(circle at 50% 105%, rgba(123, 237, 159, 0.26) 0, transparent 55%);
+      opacity: 0.85;
+      pointer-events: none;
+    }
+
+    .hero-tree-card {
+      position: relative;
+      border-radius: 24px;
+      overflow: hidden;
+      background: linear-gradient(145deg, #0b3222, #164531, #1c5f3a);
+      color: #e9fff5;
+      padding: 1rem;
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 0.8rem;
+    }
+
+    .hero-tree-photo {
+      border-radius: 20px;
+      overflow: hidden;
+      position: relative;
+      isolation: isolate;
+      box-shadow:
+        0 20px 40px rgba(0, 0, 0, 0.45),
+        0 0 40px rgba(59, 255, 174, 0.6);
+    }
+
+    .hero-tree-photo img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.02);
+    }
+
+    .hero-tree-photo::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 25% 0%, rgba(255, 255, 255, 0.16), transparent 52%);
+      mix-blend-mode: screen;
+    }
+
+    .hero-tree-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 0.5rem;
+    }
+
+    .hero-tree-info h3 {
+      font-size: 1.1rem;
+    }
+
+    .hero-tree-info ul {
+      list-style: none;
+      font-size: 0.8rem;
+      opacity: 0.9;
+      display: grid;
+      gap: 0.25rem;
+    }
+
+    .hero-tree-pill {
+      align-self: flex-start;
+      font-size: 0.75rem;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(189, 248, 226, 0.7);
+    }
+
+    .hero-floating-tag {
+      position: absolute;
+      top: -12px;
+      right: 12px;
+      padding: 0.3rem 0.7rem;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.96);
+      color: #08301f;
+      font-size: 0.75rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .hero-glow-orb {
+      position: absolute;
+      width: 120px;
+      height: 120px;
+      border-radius: 999px;
+      background: radial-gradient(circle, rgba(255, 255, 255, 0.7) 0, rgba(255, 255, 255, 0) 70%);
+      bottom: -20px;
+      left: -20px;
+      opacity: 0.75;
+    }
+
+    /* ---------- SECTIONS: SHARED STYLES ---------- */
+    .section-kicker {
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      font-size: 0.7rem;
+      color: rgba(17, 75, 47, 0.9);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-title {
+      font-size: 1.7rem;
+      margin-bottom: 0.6rem;
+    }
+
+    .section-subtitle {
+      font-size: 0.95rem;
+      color: rgba(12, 38, 24, 0.8);
+      max-width: 540px;
+      margin-bottom: 1.8rem;
+    }
+
+    /* ---------- HOW IT WORKS ---------- */
+    #how-it-works {
+      margin-top: -1rem;
+    }
+
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .step-card {
+      position: relative;
+      padding: 1.2rem 1.1rem 1.3rem 1.1rem;
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 16px 40px rgba(23, 78, 52, 0.09);
+      border: 1px solid rgba(202, 229, 212, 0.95);
+      overflow: hidden;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .step-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 0 0, rgba(125, 249, 185, 0.2) 0, transparent 55%);
+      opacity: 0;
+      transition: opacity 0.18s ease;
+      pointer-events: none;
+    }
+
+    .step-card:hover {
+      transform: translateY(-3px);
+      border-color: rgba(102, 216, 158, 0.9);
+      box-shadow: 0 25px 70px rgba(20, 95, 60, 0.25);
+    }
+
+    .step-card:hover::before {
+      opacity: 1;
+    }
+
+    .step-number {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: rgba(14, 65, 40, 0.9);
+      margin-bottom: 0.4rem;
+    }
+
+    .step-title {
+      font-weight: 600;
+      margin-bottom: 0.3rem;
+    }
+
+    .step-body {
+      font-size: 0.86rem;
+      color: rgba(12, 38, 24, 0.85);
+      margin-bottom: 0.6rem;
+    }
+
+    .step-note {
+      font-size: 0.78rem;
+      color: rgba(10, 80, 54, 0.9);
+      background: rgba(227, 252, 239, 0.95);
+      padding: 0.35rem 0.55rem;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+
+    /* ---------- TREE INFO CARDS (LED BULBS) ---------- */
+    #tree-info {
+      margin-top: -1rem;
+    }
+
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1.4rem;
+    }
+
+    .info-card {
+      position: relative;
+      padding: 1.4rem 1.1rem 1.4rem;
+      border-radius: 24px;
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.98), rgba(243, 252, 248, 0.98));
+      border: 1px solid rgba(202, 229, 212, 0.95);
+      box-shadow: 0 16px 40px rgba(23, 78, 52, 0.09);
+      overflow: hidden;
+      cursor: default;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease;
+    }
+
+    .info-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 26px 70px rgba(20, 95, 60, 0.28);
+      border-color: rgba(98, 210, 155, 1);
+    }
+
+    /* LED bulb strip */
+    .bulb-strip {
+      position: absolute;
+      top: 10px;
+      left: 14px;
+      right: 14px;
+      display: flex;
+      justify-content: space-between;
+      pointer-events: none;
+    }
+
+    .bulb {
+      width: 9px;
+      height: 9px;
+      border-radius: 999px;
+      background: #ff4b6b;
+      box-shadow: 0 0 0 rgba(255, 75, 107, 0.5);
+      opacity: 0.75;
+      transform: translateY(0);
+    }
+
+    .bulb:nth-child(2) {
+      background: #3cd68c;
+    }
+
+    .bulb:nth-child(3) {
+      background: #ffd166;
+    }
+
+    .bulb:nth-child(4) {
+      background: #47b3ff;
+    }
+
+    .bulb:nth-child(5) {
+      background: #ff8fb3;
+    }
+
+    .info-card:hover .bulb {
+      animation: bulbGlow 1.2s ease-in-out infinite alternate;
+    }
+
+    .info-card:hover .bulb:nth-child(2) {
+      animation-delay: 0.15s;
+    }
+
+    .info-card:hover .bulb:nth-child(3) {
+      animation-delay: 0.3s;
+    }
+
+    .info-card:hover .bulb:nth-child(4) {
+      animation-delay: 0.45s;
+    }
+
+    .info-card:hover .bulb:nth-child(5) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes bulbGlow {
+      0% {
+        transform: translateY(0);
+        box-shadow: 0 0 4px currentColor, 0 0 10px rgba(255, 255, 255, 0.8);
+        opacity: 0.7;
+      }
+      100% {
+        transform: translateY(1px);
+        box-shadow: 0 0 10px currentColor, 0 0 25px rgba(255, 255, 255, 1);
+        opacity: 1;
+      }
+    }
+
+    .info-card-inner {
+      margin-top: 1.5rem;
+    }
+
+    .info-card-title {
+      font-weight: 700;
+      margin-bottom: 0.4rem;
+    }
+
+    .info-card-body {
+      font-size: 0.88rem;
+      color: rgba(12, 38, 24, 0.85);
+      margin-bottom: 0.65rem;
+    }
+
+    .info-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      font-size: 0.78rem;
+      padding: 0.3rem 0.55rem;
+      border-radius: 999px;
+      background: rgba(232, 252, 242, 0.98);
+      color: rgba(10, 80, 54, 0.95);
+    }
+
+    /* ---------- VIEW TREES (GALLERY) ---------- */
+    #view-trees {
+      scroll-margin-top: 90px;
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 1rem;
+    }
+
+    .tree-tile {
+      position: relative;
+      border-radius: 20px;
+      overflow: hidden;
+      background: #0c3020;
+      min-height: 160px;
+      box-shadow: 0 18px 40px rgba(13, 56, 35, 0.55);
+      transition: transform 0.22s ease, box-shadow 0.22s ease;
+    }
+
+    .tree-tile img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.06);
+      transition: transform 0.22s ease;
+    }
+
+    .tree-tile::after {
+      content: "Example photo";
+      position: absolute;
+      left: 10px;
+      bottom: 8px;
+      padding: 0.2rem 0.5rem;
+      border-radius: 999px;
+      font-size: 0.7rem;
+      background: rgba(5, 21, 12, 0.7);
+      color: #e9fff5;
+      backdrop-filter: blur(4px);
+    }
+
+    .tree-tile:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 25px 60px rgba(7, 41, 24, 0.8);
+    }
+
+    .tree-tile:hover img {
+      transform: scale(1.1);
+    }
+
+    .gallery-note {
+      margin-top: 1rem;
+      font-size: 0.82rem;
+      color: rgba(12, 38, 24, 0.85);
+    }
+
+    /* ---------- FAQ / DETAILS ---------- */
+    #details {
+      margin-top: 0.2rem;
+    }
+
+    .details-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 2rem;
+    }
+
+    .details-list {
+      list-style: none;
+      display: grid;
+      gap: 0.8rem;
+      font-size: 0.9rem;
+      color: rgba(12, 38, 24, 0.9);
+    }
+
+    .details-list li {
+      display: flex;
+      gap: 0.55rem;
+      align-items: flex-start;
+    }
+
+    .details-bullet {
+      margin-top: 0.3rem;
+      font-size: 0.8rem;
+    }
+
+    .details-card {
+      border-radius: 24px;
+      padding: 1.3rem 1.2rem;
+      background: linear-gradient(145deg, #0f3e28, #19573a);
+      color: #e9fff5;
+      box-shadow: 0 24px 60px rgba(6, 33, 21, 0.8);
+      font-size: 0.88rem;
+    }
+
+    .details-card h3 {
+      font-size: 1.05rem;
+      margin-bottom: 0.4rem;
+    }
+
+    .details-card p {
+      margin-bottom: 0.6rem;
+    }
+
+    .details-emphasis {
+      font-weight: 600;
+      color: #9bf3c7;
+    }
+
+    /* ---------- CONTACT ---------- */
+    #contact {
+      margin-top: -0.3rem;
+      padding-bottom: 4.5rem;
+    }
+
+    .contact-wrapper {
+      border-radius: 26px;
+      padding: 1.8rem 1.4rem;
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.98), rgba(237, 253, 246, 0.98));
+      box-shadow: 0 22px 60px rgba(15, 62, 40, 0.2);
+      border: 1px solid rgba(192, 230, 207, 0.95);
+      display: grid;
+      grid-template-columns: 1.4fr 1fr;
+      gap: 1.6rem;
+    }
+
+    .contact-points {
+      font-size: 0.9rem;
+      color: rgba(12, 38, 24, 0.9);
+      display: grid;
+      gap: 0.7rem;
+    }
+
+    .contact-pill-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+
+    .contact-pill {
+      padding: 0.4rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      border: 1px solid rgba(139, 211, 173, 0.9);
+      background: rgba(242, 255, 249, 0.98);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .contact-highlight {
+      font-weight: 600;
+      color: rgba(11, 91, 54, 1);
     }
 
     .contact-box {
-        background: rgba(255,0,0,0.15);
-        padding: 25px;
-        border-radius: 12px;
-        border: 1px solid rgba(255,0,0,0.4);
+      border-radius: 22px;
+      padding: 1.1rem 1rem;
+      background: radial-gradient(circle at top left, rgba(144, 238, 144, 0.14), transparent 60%),
+                  rgba(7, 48, 31, 0.98);
+      color: #e9fff5;
+      font-size: 0.86rem;
+      box-shadow: 0 18px 55px rgba(3, 23, 14, 0.75);
     }
 
-    a.cta {
-        display: inline-block;
-        margin-top: 20px;
-        padding: 12px 22px;
-        background: #4CAF50;
-        color: white;
-        border-radius: 8px;
-        text-decoration: none;
-        font-weight: bold;
+    .contact-box h3 {
+      font-size: 1rem;
+      margin-bottom: 0.4rem;
     }
 
-    a.cta:hover {
-        background: #3c8c40;
+    .contact-box a {
+      color: #9bf3c7;
+      text-decoration: underline;
+      text-underline-offset: 3px;
     }
-</style>
+
+    /* ---------- FOOTER ---------- */
+    footer {
+      position: relative;
+      z-index: 1;
+      border-top: 1px solid rgba(210, 229, 219, 0.95);
+      padding: 1.2rem 1.5rem 1.5rem;
+      font-size: 0.78rem;
+      color: rgba(12, 38, 24, 0.7);
+      max-width: 1120px;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      justify-content: space-between;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+
+    footer span {
+      opacity: 0.85;
+    }
+
+    /* ---------- SIMPLE REVEAL ANIMATIONS ---------- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ---------- RESPONSIVE ---------- */
+    @media (max-width: 900px) {
+      #hero {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 2.5rem;
+      }
+
+      .hero-visual {
+        order: -1;
+      }
+
+      .steps-grid,
+      .info-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .gallery-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .details-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .contact-wrapper {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 640px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.7rem;
+      }
+
+      nav {
+        width: 100%;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+      }
+
+      section {
+        padding-inline: 1.1rem;
+      }
+
+      .steps-grid,
+      .info-grid,
+      .gallery-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .hero-cta-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .contact-pill-row {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
 </head>
-
 <body>
+  <canvas id="snow-canvas"></canvas>
 
-<!-- SNOW SCRIPT -->
-<script>
-    const snowCount = 60; 
-    for (let i = 0; i < snowCount; i++) {
-        let snow = document.createElement("div");
-        snow.classList.add("snowflake");
-        snow.innerHTML = "❄";
-        snow.style.left = Math.random() * 100 + "vw";
-        snow.style.animationDuration = 5 + Math.random() * 7 + "s";
-        snow.style.fontSize = 10 + Math.random() * 20 + "px";
-        document.body.appendChild(snow);
-    }
-</script>
-
-<!-- HERO -->
-<section class="hero">
-    <h1>Wiltshire Christmas Trees</h1>
-    <p>Fresh, premium, locally-delivered Christmas trees — straight to your door across Wiltshire and surrounding areas.</p>
-</section>
-
-<!-- TREE SIZES -->
-<section class="section">
-    <h2>Our Trees (5ft – 9ft)</h2>
-
-    <div class="tree-card">
-        <h3>5ft Christmas Tree</h3>
-        <p>Perfect for flats, smaller living rooms, or cosy corners.</p>
+  <header>
+    <div class="brand">
+      <div class="brand-logo"></div>
+      <div class="brand-text">
+        <strong>Wiltshire Christmas Trees</strong>
+        <span>Local, fresh & delivered to your door</span>
+      </div>
     </div>
 
-    <div class="tree-card">
-        <h3>6ft Christmas Tree</h3>
-        <p>The UK’s most popular size — full, tall, and perfectly balanced.</p>
-    </div>
+    <nav>
+      <a href="#hero" class="nav-link">Home</a>
+      <a href="#view-trees" class="nav-link">View trees</a>
+      <a href="#contact" class="nav-cta">Message us</a>
+    </nav>
+  </header>
 
-    <div class="tree-card">
-        <h3>7ft Christmas Tree</h3>
-        <p>A statement tree with a full shape for bigger rooms.</p>
-    </div>
+  <main>
+    <!-- HERO -->
+    <section id="hero">
+      <div class="hero-copy reveal">
+        <div class="hero-kicker">
+          <span class="hero-kicker-dot"></span>
+          Wiltshire • Christmas 2025
+        </div>
+        <h1 class="hero-title">
+          Premium Christmas Trees.<br>
+          <span>No hassle, delivered fast.</span>
+        </h1>
+        <p class="hero-subtitle">
+          Fresh, real Christmas trees delivered across Wiltshire.
+          Pick your size, we’ll send you photos, and we deliver to your doorstep
+          within <strong>48 hours</strong>. Pay by <strong>cash</strong> or
+          <strong>bank transfer</strong> on delivery.
+        </p>
 
-    <div class="tree-card">
-        <h3>8–9ft Christmas Tree</h3>
-        <p>Premium, tall centrepiece trees for large homes or businesses.</p>
-    </div>
-</section>
+        <div class="hero-badges">
+          <div class="hero-badge">
+            <span class="hero-badge-emoji">🎄</span>
+            100% real, premium trees
+          </div>
+          <div class="hero-badge">
+            <span class="hero-badge-emoji">🚚</span>
+            Delivery across Wiltshire
+          </div>
+          <div class="hero-badge">
+            <span class="hero-badge-emoji">📸</span>
+            We send photos before we come
+          </div>
+        </div>
 
-<!-- DELIVERY -->
-<section class="section">
-    <h2>Delivery Across Wiltshire</h2>
-    <p>We deliver directly to homes in: Neston, Corsham, Chippenham, Melksham, Trowbridge, Bath outskirts, Devizes, Calne, and nearby areas.</p>
+        <div class="hero-cta-row">
+          <a href="#view-trees" class="hero-primary-cta">
+            View trees
+            <span>↓</span>
+          </a>
+          <a href="#contact" class="hero-secondary-cta">
+            Message us to enquire
+            <span>💬</span>
+          </a>
+        </div>
 
-    <p>Trees are delivered **fresh**, same-day or next-day depending on time of order.</p>
+        <p class="hero-contact-line">
+          Call / WhatsApp:
+          <strong><a href="tel:+447398103339">07398 103339</a></strong><br />
+          Email:
+          <strong>
+            <a href="mailto:wiltshirechristmastrees@gmail.com">
+              wiltshirechristmastrees@gmail.com
+            </a>
+          </strong>
+          <!-- You can change this email easily in the code above when you know the final one. -->
+        </p>
+      </div>
 
-    <p>We also **send you photos** of the exact tree before delivery so you know exactly what you're getting.</p>
-</section>
+      <div class="hero-visual reveal">
+        <div class="hero-glass">
+          <div class="hero-tree-card">
+            <div class="hero-tree-photo">
+              <img src="https://source.unsplash.com/featured/?christmas-tree,forest" alt="Christmas tree in a field">
+            </div>
+            <div class="hero-tree-info">
+              <div>
+                <h3>Fresh from local growers</h3>
+                <ul>
+                  <li>Hand-selected once you message us</li>
+                  <li>Photos sent before we deliver</li>
+                  <li>Ideal for homes, shops & pubs</li>
+                </ul>
+              </div>
+              <div class="hero-tree-pill">
+                Typically delivered in <strong>24–48 hours</strong> 🚚
+              </div>
+            </div>
+          </div>
+          <div class="hero-floating-tag">
+            From 4ft–7ft+ trees 🎄
+          </div>
+          <div class="hero-glow-orb"></div>
+        </div>
+      </div>
+    </section>
 
-<!-- CONTACT -->
-<section class="section">
-    <h2>Order Your Tree</h2>
+    <!-- HOW IT WORKS -->
+    <section id="how-it-works" class="reveal">
+      <p class="section-kicker">How it works</p>
+      <h2 class="section-title">Simple, friendly & no-stress</h2>
+      <p class="section-subtitle">
+        We’re keeping it old-school simple with modern convenience.
+        No checkout pages, no forms — just real trees and real people.
+      </p>
 
-    <div class="contact-box">
-        <p><strong>Call / Text / WhatsApp:</strong> 07398 103339</p>
-        <p><strong>Email:</strong> wiltshirexmastrees@gmail.com</p>
-        <p>Pay by cash or bank transfer on delivery.</p>
-    </div>
+      <div class="steps-grid">
+        <div class="step-card">
+          <p class="step-number">Step 1</p>
+          <p class="step-title">Message us with what you’re after</p>
+          <p class="step-body">
+            Tell us roughly what size you’d like (for example: “around 5–6ft”)
+            and where in Wiltshire you’re based. You can message us on
+            WhatsApp, Instagram or Facebook.
+          </p>
+          <span class="step-note">
+            <span>💬</span>
+            We’ll reply as soon as we can.
+          </span>
+        </div>
 
-    <a class="cta" href="tel:07398103339">Call Now</a>
-</section>
+        <div class="step-card">
+          <p class="step-number">Step 2</p>
+          <p class="step-title">We hand-pick & send you photos</p>
+          <p class="step-body">
+            We select real trees from local growers and send you clear photos
+            so you can see shape, fullness and height before you say yes.
+          </p>
+          <span class="step-note">
+            <span>📸</span>
+            You only confirm when you’re happy.
+          </span>
+        </div>
 
+        <div class="step-card">
+          <p class="step-number">Step 3</p>
+          <p class="step-title">Delivered to your door within 48 hours</p>
+          <p class="step-body">
+            Once you’re happy, we arrange a delivery slot and bring the tree
+            straight to your door – normally within <strong>48 hours</strong>.
+          </p>
+          <span class="step-note">
+            <span>💷</span>
+            Pay by cash or bank transfer on delivery.
+          </span>
+        </div>
+      </div>
+    </section>
+
+    <!-- TREE INFO CARDS -->
+    <section id="tree-info" class="reveal">
+      <p class="section-kicker">Tree details</p>
+      <h2 class="section-title">Sizes, timing & types of trees</h2>
+      <p class="section-subtitle">
+        Here’s the quick overview of what we usually stock. If you’re after
+        something very specific, just pop us a message and we’ll see what
+        we can do.
+      </p>
+
+      <div class="info-grid">
+        <!-- Sizes -->
+        <article class="info-card">
+          <div class="bulb-strip">
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+          </div>
+          <div class="info-card-inner">
+            <h3 class="info-card-title">Tree sizes we usually offer</h3>
+            <p class="info-card-body">
+              Most of our trees for homes and small businesses sit between
+              <strong>4ft and 7ft+</strong>.
+              If you’re not sure what you need, tell us where it’s going
+              and we’ll suggest a size.
+            </p>
+            <span class="info-tag">
+              🎄
+              <span>Smaller or larger? Ask and we’ll check.</span>
+            </span>
+          </div>
+        </article>
+
+        <!-- Delivery time -->
+        <article class="info-card">
+          <div class="bulb-strip">
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+          </div>
+          <div class="info-card-inner">
+            <h3 class="info-card-title">Delivery time</h3>
+            <p class="info-card-body">
+              We aim to deliver within
+              <strong>up to 48 hours</strong> of you confirming your tree.
+              We’ll agree a rough window with you so you’re not stuck
+              waiting around all day.
+            </p>
+            <span class="info-tag">
+              🚚
+              <span>Need it sooner? We’ll see what’s possible.</span>
+            </span>
+          </div>
+        </article>
+
+        <!-- Types of trees -->
+        <article class="info-card">
+          <div class="bulb-strip">
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+            <div class="bulb"></div>
+          </div>
+          <div class="info-card-inner">
+            <h3 class="info-card-title">Types of trees</h3>
+            <p class="info-card-body">
+              We usually stock two of the most popular real Christmas
+              trees in the UK:
+              <strong>Nordmann Fir</strong> (soft needles, holds well)
+              and <strong>Norway Spruce</strong> (traditional look and scent).
+            </p>
+            <span class="info-tag">
+              🌲
+              <span>Ask us what’s available when you message.</span>
+            </span>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- VIEW TREES / GALLERY -->
+    <section id="view-trees" class="reveal">
+      <p class="section-kicker">View trees</p>
+      <h2 class="section-title">A feel for the style of trees we source</h2>
+      <p class="section-subtitle">
+        These are example photos to show the kind of full, bushy trees we aim
+        to deliver. When you enquire, we’ll send you real photos of
+        <em>your</em> tree options before we bring anything out.
+      </p>
+
+      <div class="gallery-grid">
+        <div class="tree-tile">
+          <img src="https://source.unsplash.com/featured/?christmas-tree,farm" alt="Christmas tree farm">
+        </div>
+        <div class="tree-tile">
+          <img src="https://source.unsplash.com/featured/?christmas-tree,green" alt="Full green Christmas tree">
+        </div>
+        <div class="tree-tile">
+          <img src="https://source.unsplash.com/featured/?christmas-tree,outdoor" alt="Christmas trees outside">
+        </div>
+        <div class="tree-tile">
+          <img src="https://source.unsplash.com/featured/?christmas-tree,snow" alt="Christmas tree in snow">
+        </div>
+      </div>
+
+      <p class="gallery-note">
+        We will always <strong>send you photos</strong> of the exact trees
+        available before you decide. If you don’t like the look, you don’t
+        have to go ahead.
+      </p>
+    </section>
+
+    <!-- DETAILS / FAQ -->
+    <section id="details" class="reveal">
+      <p class="section-kicker">The small print (but friendly)</p>
+      <h2 class="section-title">A few useful things to know</h2>
+      <div class="details-grid">
+        <ul class="details-list">
+          <li>
+            <span class="details-bullet">✅</span>
+            <span><strong>Payment:</strong> Pay by <strong>cash</strong> or
+              <strong>bank transfer</strong> on delivery – no online checkout needed.</span>
+          </li>
+          <li>
+            <span class="details-bullet">✅</span>
+            <span><strong>Where we deliver:</strong> Across Wiltshire and nearby
+              areas – message us with your postcode and we’ll confirm.</span>
+          </li>
+          <li>
+            <span class="details-bullet">📸</span>
+            <span><strong>Photos before we come:</strong> We’ll send you photos
+              of the actual trees so you can choose your favourite.</span>
+          </li>
+          <li>
+            <span class="details-bullet">🕒</span>
+            <span><strong>Delivery slots:</strong> We try to give you a
+              delivery window so you’re not waiting in all day.</span>
+          </li>
+          <li>
+            <span class="details-bullet">🎄</span>
+            <span><strong>Stands & extras:</strong> If you need a stand or have
+              particular preferences, let us know when you message.</span>
+          </li>
+        </ul>
+
+        <div class="details-card">
+          <h3>Nice and simple, the way Christmas should be</h3>
+          <p>
+            We’re not running a big online shop – just a small, friendly
+            local service bringing fresh trees to homes and small businesses
+            around Wiltshire.
+          </p>
+          <p>
+            If you’re unsure about anything, just ask. We’d rather answer
+            questions and make sure you’re happy than rush you into
+            anything that doesn’t feel right.
+          </p>
+          <p class="details-emphasis">
+            Send us a quick message with your postcode and a rough size,
+            and we’ll take it from there. 🎄
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact" class="reveal">
+      <p class="section-kicker">Get in touch</p>
+      <h2 class="section-title">Message us to enquire or book a tree</h2>
+      <p class="section-subtitle">
+        You can message us on WhatsApp, Instagram or Facebook – whatever is
+        easiest. We’ll reply as soon as we can with sizes, prices and photos.
+      </p>
+
+      <div class="contact-wrapper">
+        <div class="contact-points">
+          <p>
+            When you message, it really helps if you can include:
+          </p>
+          <ul class="details-list">
+            <li>
+              <span class="details-bullet">📍</span>
+              <span>Your <strong>postcode</strong></span>
+            </li>
+            <li>
+              <span class="details-bullet">📏</span>
+              <span>What <strong>size</strong> tree you’d like (roughly)</span>
+            </li>
+            <li>
+              <span class="details-bullet">🏠</span>
+              <span>If it’s for a home, shop, pub or something else</span>
+            </li>
+          </ul>
+
+          <div class="contact-pill-row">
+            <div class="contact-pill">
+              💬 <span>Message us on WhatsApp, Instagram or Facebook</span>
+            </div>
+            <div class="contact-pill">
+              📞
+              <span>Call / WhatsApp: <span class="contact-highlight">07398 103339</span></span>
+            </div>
+            <div class="contact-pill">
+              ✉️
+              <span>Email: <span class="contact-highlight">wiltshirechristmastrees@gmail.com</span></span>
+            </div>
+          </div>
+        </div>
+
+        <div class="contact-box">
+          <h3>Quick message idea you can copy & paste:</h3>
+          <p>
+            “Hi, I’m in [your area / postcode] and I’m looking for a
+            Christmas tree around [size] for my [home / shop / pub]. What
+            have you got available, and how much roughly? Thanks!”
+          </p>
+          <p>
+            Drop that to us on WhatsApp, Instagram, Facebook or email and
+            we’ll come back with options, photos and a delivery estimate.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© <span id="year"></span> Wiltshire Christmas Trees.</span>
+    <span>Fresh trees • Friendly service • Pay on delivery.</span>
+  </footer>
+
+  <script>
+    // ---------- YEAR ----------
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // ---------- SNOW EFFECT ----------
+    (function () {
+      const canvas = document.getElementById("snow-canvas");
+      const ctx = canvas.getContext("2d");
+      let width, height;
+      let flakes = [];
+
+      function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+      }
+
+      window.addEventListener("resize", resize);
+      resize();
+
+      function createFlakes(count) {
+        flakes = [];
+        for (let i = 0; i < count; i++) {
+          flakes.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: Math.random() * 2.2 + 0.8,
+            speedY: Math.random() * 0.6 + 0.3,
+            drift: Math.random() * 0.6 - 0.3
+          });
+        }
+      }
+
+      // more flakes on big screens, fewer on mobile
+      const flakeCount = window.innerWidth > 900 ? 160 : 90;
+      createFlakes(flakeCount);
+
+      function draw() {
+        ctx.clearRect(0, 0, width, height);
+        ctx.fillStyle = "rgba(255,255,255,0.9)";
+        ctx.beginPath();
+
+        for (let f of flakes) {
+          ctx.moveTo(f.x, f.y);
+          ctx.arc(f.x, f.y, f.r, 0, Math.PI * 2);
+        }
+        ctx.fill();
+        update();
+        requestAnimationFrame(draw);
+      }
+
+      function update() {
+        for (let f of flakes) {
+          f.y += f.speedY;
+          f.x += f.drift * 0.4;
+
+          if (f.y > height + 5) {
+            f.y = -10;
+            f.x = Math.random() * width;
+          }
+          if (f.x > width + 10) f.x = -10;
+          if (f.x < -10) f.x = width + 10;
+        }
+      }
+
+      draw();
+    })();
+
+    // ---------- REVEAL ON SCROLL ----------
+    const revealEls = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.1
+      }
+    );
+
+    revealEls.forEach((el) => observer.observe(el));
+  </script>
 </body>
 </html>
