@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wiltshire Christmas Trees – Local Delivery</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Inter', sans-serif;
+        background: #0d1b0f;
+        color: white;
+        overflow-x: hidden;
+    }
+
+    /* Snowfall */
+    .snowflake {
+        position: fixed;
+        top: -10px;
+        color: white;
+        font-size: 1rem;
+        pointer-events: none;
+        animation: fall linear infinite;
+        opacity: 0.8;
+    }
+
+    @keyframes fall {
+        0%   { transform: translateY(0); }
+        100% { transform: translateY(110vh); }
+    }
+
+    /* Hero */
+    .hero {
+        background: url('https://images.unsplash.com/photo-1543968443-3ddaf55f9a5f?q=80&w=2070&auto=format&fit=crop') center/cover no-repeat;
+        padding: 140px 20px;
+        text-align: center;
+        backdrop-filter: brightness(0.7);
+    }
+
+    .hero h1 {
+        font-size: 3rem;
+        font-weight: 800;
+        margin-bottom: 10px;
+        color: #f44336;
+        text-shadow: 0 0 15px rgba(255,0,0,0.7);
+    }
+
+    .hero p {
+        font-size: 1.3rem;
+        color: #ffe6e6;
+        max-width: 600px;
+        margin: auto;
+    }
+
+    .section {
+        padding: 60px 20px;
+        max-width: 900px;
+        margin: auto;
+        text-align: center;
+    }
+
+    .section h2 {
+        font-size: 2rem;
+        color: #4CAF50;
+        margin-bottom: 15px;
+    }
+
+    .tree-card {
+        background: rgba(255,255,255,0.1);
+        padding: 20px;
+        border-radius: 12px;
+        margin-bottom: 20px;
+        backdrop-filter: blur(4px);
+        border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .tree-card h3 {
+        color: #4CAF50;
+        margin-bottom: 5px;
+    }
+
+    .contact-box {
+        background: rgba(255,0,0,0.15);
+        padding: 25px;
+        border-radius: 12px;
+        border: 1px solid rgba(255,0,0,0.4);
+    }
+
+    a.cta {
+        display: inline-block;
+        margin-top: 20px;
+        padding: 12px 22px;
+        background: #4CAF50;
+        color: white;
+        border-radius: 8px;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    a.cta:hover {
+        background: #3c8c40;
+    }
+</style>
+</head>
+
+<body>
+
+<!-- SNOW SCRIPT -->
+<script>
+    const snowCount = 60; 
+    for (let i = 0; i < snowCount; i++) {
+        let snow = document.createElement("div");
+        snow.classList.add("snowflake");
+        snow.innerHTML = "❄";
+        snow.style.left = Math.random() * 100 + "vw";
+        snow.style.animationDuration = 5 + Math.random() * 7 + "s";
+        snow.style.fontSize = 10 + Math.random() * 20 + "px";
+        document.body.appendChild(snow);
+    }
+</script>
+
+<!-- HERO -->
+<section class="hero">
+    <h1>Wiltshire Christmas Trees</h1>
+    <p>Fresh, premium, locally-delivered Christmas trees — straight to your door across Wiltshire and surrounding areas.</p>
+</section>
+
+<!-- TREE SIZES -->
+<section class="section">
+    <h2>Our Trees (5ft – 9ft)</h2>
+
+    <div class="tree-card">
+        <h3>5ft Christmas Tree</h3>
+        <p>Perfect for flats, smaller living rooms, or cosy corners.</p>
+    </div>
+
+    <div class="tree-card">
+        <h3>6ft Christmas Tree</h3>
+        <p>The UK’s most popular size — full, tall, and perfectly balanced.</p>
+    </div>
+
+    <div class="tree-card">
+        <h3>7ft Christmas Tree</h3>
+        <p>A statement tree with a full shape for bigger rooms.</p>
+    </div>
+
+    <div class="tree-card">
+        <h3>8–9ft Christmas Tree</h3>
+        <p>Premium, tall centrepiece trees for large homes or businesses.</p>
+    </div>
+</section>
+
+<!-- DELIVERY -->
+<section class="section">
+    <h2>Delivery Across Wiltshire</h2>
+    <p>We deliver directly to homes in: Neston, Corsham, Chippenham, Melksham, Trowbridge, Bath outskirts, Devizes, Calne, and nearby areas.</p>
+
+    <p>Trees are delivered **fresh**, same-day or next-day depending on time of order.</p>
+
+    <p>We also **send you photos** of the exact tree before delivery so you know exactly what you're getting.</p>
+</section>
+
+<!-- CONTACT -->
+<section class="section">
+    <h2>Order Your Tree</h2>
+
+    <div class="contact-box">
+        <p><strong>Call / Text / WhatsApp:</strong> 07398 103339</p>
+        <p><strong>Email:</strong> wiltshirexmastrees@gmail.com</p>
+        <p>Pay by cash or bank transfer on delivery.</p>
+    </div>
+
+    <a class="cta" href="tel:07398103339">Call Now</a>
+</section>
+
+</body>
+</html>
